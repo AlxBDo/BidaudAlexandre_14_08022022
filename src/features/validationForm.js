@@ -15,11 +15,16 @@ const { actions, reducer } = createSlice({
     name: "validationForm", 
     initialState,
     reducers: {
-        clear: (draft) => {
-            draft.status = "off" 
-            draft.inputs = [] 
-            draft.checked = []
-            return
+        clearForm: {
+            prepare: (formId) => ({
+                payload : { formId }
+            }), 
+            reducer: (draft, action) => {
+                if(draft.forms[action.payload.formId] && draft.forms[action.payload.formId].status !== "to-check"){
+                    draft.forms[action.payload.formId].status = "to-check"
+                }
+                return
+            }
         },
         addForm: {
             prepare: (formId, inputs) => ({
@@ -66,16 +71,29 @@ const { actions, reducer } = createSlice({
                 const index = inputChecked.indexOf(inputId)
                 if(draft.forms[formId] && index >= 0){
                     draft.forms[formId].checked = inputChecked.splice(index, 1)
-                    if(draft.forms[formId].status === "checked"){
+                    if(draft.forms[formId].status !== "to-check"){
                         draft.forms[formId].status = "to-check"
                     }
                 }
                 return 
             }
+        },
+        submitForm: {
+            prepare: (formId) => ({
+                payload: { formId }
+            }),
+            reducer: (draft, action) => {
+                const formId = action.payload.formId
+                if(draft.forms[formId] && draft.forms[formId].checked.length === draft.forms[formId].inputs.length){
+                    draft.forms[formId].checked = []
+                    draft.forms[formId].status = "submited"
+                }
+                return
+            }
         }
     }
 })
 
-export const { addForm, addCheckedInput, clear, removeCheckedInput } = actions
+export const { addForm, addCheckedInput, clearForm, removeCheckedInput, submitForm } = actions
 
 export default reducer

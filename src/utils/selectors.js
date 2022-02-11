@@ -1,0 +1,1 @@
+export const selectValidationForm = (formId) => (state) => { return state.validationForm.forms[formId] }

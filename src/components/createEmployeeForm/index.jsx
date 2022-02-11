@@ -1,18 +1,22 @@
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import ReactModal from "react-modal"
 
-import { StyledForm } from "./style"
+import Form from "../form"
 import { City, DateOfBirth, Department, FirstName, inputsId, LastName, StartDate, States, Street, ZipCode } from "./inputs"
-import * as validationFormAction from "../../features/validationForm"
 
 
 function CreateEmployeeForm() {
 
-    const dispatch = useDispatch()
-    dispatch(validationFormAction.addForm("createEmployeeForm", inputsId))
-
     return(
 
-        <StyledForm>
+        <Form 
+            formId="createEmployeeForm" 
+            inputsId={ inputsId } 
+            modalContentLabel="Employee creation form" 
+            modalContentText="👍 Employee Created!" 
+            submitButtonText="Save" 
+            submitFunction={ (input) => console.log(...input)}
+        >
 
             <FirstName />
             <LastName />
@@ -29,9 +33,7 @@ function CreateEmployeeForm() {
 
             <Department />
 
-            <button>Save</button>
-            <div id="confirmation" className="modal">Employee Created!</div>
-        </StyledForm>
+        </Form>
 
     )
 }
