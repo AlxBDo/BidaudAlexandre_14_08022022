@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const formState = (inputs) => { return {
     status: "to-check", 
+    issue: false,
     inputs, 
     checked: [] 
 }}
@@ -22,6 +23,7 @@ const { actions, reducer } = createSlice({
             reducer: (draft, action) => {
                 if(draft.forms[action.payload.formId] && draft.forms[action.payload.formId].status !== "to-check"){
                     draft.forms[action.payload.formId].status = "to-check"
+                    draft.forms[action.payload.formId].issue = false
                 }
                 return
             }
@@ -73,18 +75,20 @@ const { actions, reducer } = createSlice({
                     draft.forms[formId].checked = inputChecked.splice(index, 1)
                     if(draft.forms[formId].status !== "to-check"){
                         draft.forms[formId].status = "to-check"
+                        draft.forms[formId].issue = false
                     }
                 }
                 return 
             }
         },
         submitForm: {
-            prepare: (formId) => ({
-                payload: { formId }
+            prepare: (formId, submitIssue) => ({
+                payload: { formId, submitIssue }
             }),
             reducer: (draft, action) => {
                 const formId = action.payload.formId
                 if(draft.forms[formId] && draft.forms[formId].checked.length === draft.forms[formId].inputs.length){
+                    draft.forms[formId].issue = action.payload.submitIssue
                     draft.forms[formId].checked = []
                     draft.forms[formId].status = "submited"
                 }

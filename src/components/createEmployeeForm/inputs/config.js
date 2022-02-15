@@ -21,21 +21,21 @@ function defineText(id, label, max = 30, min = 2, type = "text", required = true
 
 const city = defineText("city", "City", 50)
 
-const dateOfBirth = define("date-of-birth", "Date of Birth", "date")
+const dateOfBirth = define("dateOfBirth", "Date of Birth", "date")
 
 const department = defineSelect("department", "Department", departments)
 
-const firstName = defineText("first-name", "First Name") 
+const firstName = defineText("firstName", "First Name") 
 
-const lastName = defineText("last-name", "Last Name")
+const lastName = defineText("lastName", "Last Name")
 
-const startDate = define("start-date", "Start Date", "date") 
+const startDate = define("startDate", "Start Date", "date") 
 
 const state = defineSelect("state", "State", states)
 
 const street = defineText("street", "Street", 75, 4)
 
-const zipCode = defineInputHtml("zip-code", "Zip Code", 99950, 501, "number")
+const zipCode = defineInputHtml("zipCode", "Zip Code", 99950, 501, "number")
 
 
 export const config = { 

@@ -5,24 +5,25 @@ import ReactModal from "react-modal"
 import { InputsSection, StyledForm, ValidationSection } from "./style"
 import * as validationFormAction from "../../features/validationForm"
 import { selectValidationForm } from "../../utils/selectors"
+import {encryptItem} from "../../utils/crypt"
 
 
 function getValueAndClearInputs(inputsId){
-    return inputsId.map( (inputId) => {
+    const inputs = {}
+    inputsId.forEach( (inputId) => {
         const ipt = document.getElementById(inputId)
         const value = ipt.value ?? ipt.textContent
-        if(ipt.value){ ipt.value = "" 
-        } else { ipt.textContent = "" }
-        return { id: ipt.getAttribute("id"), value }
-    }, [])
+        if(ipt.value){ ipt.value = "" }
+        inputs[inputId] = value
+    })
+    return inputs
 }
 
 
 Form.propTypes = {
     formId: PropTypes.string.isRequired, 
     inputsId: PropTypes.array.isRequired, 
-    modalContentLabel: PropTypes.string.isRequired, 
-    modalContentText: PropTypes.string.isRequired, 
+    modalContentLabel: PropTypes.string.isRequired,  
     submitButtonText: PropTypes.string, 
     submitFunction: PropTypes.func.isRequired
 }
@@ -33,13 +34,12 @@ Form.defaultProps = {
 
 function Form(props) {
 
-    const { children, formId, inputsId, modalContentLabel, modalContentText, submitButtonText, submitFunction } = props
+    const { children, formId, inputsId, modalContentLabel, submitButtonText, submitFunction } = props
     const dispatch = useDispatch()
     dispatch(validationFormAction.addForm(formId, inputsId))
     const validationForm = useSelector(selectValidationForm(formId))
-    const submited = validationForm.status === "submited" 
-
-    if(submited){ submitFunction(getValueAndClearInputs(inputsId)) }
+    const modalMessage = validationForm.issue
+    const submited = modalMessage && true
 
     return(
 
@@ -50,12 +50,18 @@ function Form(props) {
             <ValidationSection>
                 <button 
                     disabled={ validationForm.status !== "checked" } 
-                    onClick={() => dispatch(validationFormAction.submitForm(formId))}
+                    onClick={() => {
+                        submitFunction(getValueAndClearInputs(inputsId)).then( (issue) => {
+                            if(issue){  
+                                dispatch(validationFormAction.submitForm(formId, issue))
+                            }
+                        })}
+                    }
                 >{ submitButtonText }</button>
                 
                 <ReactModal 
                     appElement={ document.getElementById(formId)}
-                    closeTimeoutMS={1000} 
+                    closeTimeoutMS={1500} 
                     contentLabel={modalContentLabel} 
                     id={`${formId}-validation-modal`}
                     isOpen={ submited } 
@@ -72,7 +78,7 @@ function Form(props) {
                 > 
                     <button onClick={ () => dispatch(validationFormAction.clearForm(formId)) }>Close</button>
                     <div>
-                        <p>{ modalContentText }</p>
+                        <p>{modalMessage}</p>
                         <p> This message will automatically close in 1,5 second. You can also click outside the dialog box or press "Esc". </p>
                     </div> 
                 </ReactModal>
