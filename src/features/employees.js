@@ -1,33 +1,30 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-import { getDatabase, ref, child, get } from "firebase/database";
-import { db } from "../firebase/config";
-import addEmployee from "../firebase/addEmployee";
+import { collection, getDocs } from "firebase/firestore"; 
+import { firestoreDb } from "../firebase/config";
+import { addEmployee } from "../firebase/addEmployee";
 import { selectEmployees } from "../utils/selectors";
+
 
 export function saveEmployee(employeeObj){
     return (dispatch, getState) => { 
         const employees = selectEmployees()
-        if(employees(getState()).list.indexOf(employeeObj) >= 0){ return false }
-        employeeObj.id = employees(getState()).sum
+        const employeesList = employees(getState()).list
+        if(employeesList.find(element => JSON.stringify(element) === JSON.stringify(employeeObj))){ return false }
         addEmployee(employeeObj)
         dispatch(actions.addEmployeeToList(employeeObj)) 
         return true
     }
 }
 
- export function fetchListFromStorage(){
-    const dbRef = ref(getDatabase())
-    return async (dispatch) => {
-        get(child(dbRef, "employees/")).then((employeesDb) => {
-            if(employeesDb.exists()){ 
-                return dispatch(actions.setList(employeesDb.val()))
-            } 
-        }).catch((error) => {
-            console.error("get employees error : ", error)
-        })
-    }
- }
+export async function fetchListFromFirestore(){
+    const employeesFirestore = await getDocs(collection(firestoreDb, "employees"));
+    const employees = []
+    employeesFirestore.forEach((doc) => {
+        employees.push(doc.data())
+    });
+    return employees
+}
+
 
 const initialState = {
     status : "void", 

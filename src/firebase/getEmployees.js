@@ -1,5 +1,6 @@
 import { getDatabase, ref, child, get } from "firebase/database";
-import { db } from "./config";
+import { collection, getDocs } from "firebase/firestore"; 
+import { db, firestoreDb } from "./config";
 
 const dbRef = ref(getDatabase())
 
@@ -15,4 +16,9 @@ get(child(dbRef, "employees/")).then((employeesDb) => {
     console.error("get employees error : ", error)
 })
 
-export default employees
+const employeesFirestore = await getDocs(collection(firestoreDb, "employees"));
+querySnapshot.forEach((doc) => {
+  console.log(`${doc.id} => ${doc.data()}`);
+});
+
+export { employees, employeesFirestore}

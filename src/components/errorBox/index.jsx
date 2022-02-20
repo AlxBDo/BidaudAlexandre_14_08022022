@@ -33,7 +33,7 @@ function ErrorBox(props){
             <ErrorP id={id}>{inputName} does not respect the required format.</ErrorP>
             <AdviceP>{(() => {
                 switch(id){
-                    case "zip-code-error": 
+                    case "zipCode-error": 
                         return `It must consist only of numbers ` + limitMessage(max, min, "number") 
                     case "street-error" : 
                         return `It must consist only of numbers, letters, spaces and hyphens ` 

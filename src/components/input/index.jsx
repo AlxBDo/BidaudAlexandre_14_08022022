@@ -31,18 +31,22 @@ function Input(props){
         <HrInput 
             id={id} 
             onBlur={(e) => {
-                dispatch(errorActions.clear(`${id}-error`))
-                dispatch(validationFormAction.removeCheckedInput(formId, id))
-                if(isRequired && !checkFunction(e.target.value)) {
-                    dispatch(errorActions.add({ output: `${id}-error`, what: id, why: "Wrong format" }))
-                } else {
-                    dispatch(validationFormAction.addCheckedInput(formId, id))
+                const value = e.target.value
+                if(value){
+                    dispatch(errorActions.clear(`${id}-error`))
+                    dispatch(validationFormAction.removeCheckedInput(formId, id))
+                    if(isRequired && !checkFunction(value)) {
+                        dispatch(errorActions.add({ output: `${id}-error`, what: id, why: "Wrong format" }))
+                    } else {
+                        dispatch(validationFormAction.addCheckedInput(formId, id))
+                    }
                 }
             }} 
             onChange={(e) => {
                 dispatch(errorActions.clear(`${id}-error`))
                 const value = e.target.value
-                if(value.length < 2){ return false }
+                const minLength = type === "number" ? String(min).length : min
+                if(value.length < minLength){ return false }
                 if(!checkFunction(value)) {
                     dispatch(errorActions.add({ output: `${id}-error`, what: id, why: "Wrong format" }))
                 }

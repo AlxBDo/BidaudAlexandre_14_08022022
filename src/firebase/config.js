@@ -1,6 +1,10 @@
 import { initializeApp } from "firebase/app"
 import { getDatabase } from "firebase/database"
+import { getFirestore } from "firebase/firestore"
+import { getAuth, signInAnonymously } from "firebase/auth";
 
+
+    
 
 const firebaseConfig = {
   apiKey: "AIzaSyByW52i1dLoWm2DLgclrv60ONR44HeUz_E",
@@ -14,5 +18,15 @@ const firebaseConfig = {
 
 
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+signInAnonymously(auth)
+  .then(() => {
+    return true
+  })
+  .catch((error) => {
+    console.error("Authentication failled", error)
+  });
 
 export const db = getDatabase(app)
+
+export const firestoreDb = getFirestore(app) 

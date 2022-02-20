@@ -1,9 +1,8 @@
-import { ref, set } from "firebase/database"
+import { firestoreDb } from "./config"
+import { collection, addDoc } from "firebase/firestore"; 
 
-import { db } from "./config"
 
-function addEmployee({
-    id, 
+export function addEmployee({ 
     firstName, 
     lastName, 
     dateOfBirth, 
@@ -14,17 +13,20 @@ function addEmployee({
     zipCode, 
     department 
 }){
-    set(ref(db, 'employees/'+id), {
-        firstName, 
-        lastName, 
-        dateOfBirth, 
-        startDate, 
-        street, 
-        city,
-        state, 
-        zipCode, 
-        department
-    })
+    try {
+        const docRef = addDoc(collection(firestoreDb, "employees"), {
+            firstName, 
+            lastName, 
+            dateOfBirth, 
+            startDate, 
+            street, 
+            city, 
+            state, 
+            zipCode, 
+            department 
+        });
+        console.log("Document written with ID: ", docRef.id);
+      } catch (e) {
+        console.error("Error adding document: ", e);
+      }
 }
-
-export default addEmployee
