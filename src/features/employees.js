@@ -3,6 +3,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { firestoreDb } from "../firebase/config";
 import { addEmployee } from "../firebase/addEmployee";
 import { selectEmployees } from "../utils/selectors";
+import { decryptItem } from "../utils/crypt";
 
 
 export function saveEmployee(employeeObj){
@@ -20,7 +21,13 @@ export async function fetchListFromFirestore(){
     const employeesFirestore = await getDocs(collection(firestoreDb, "employees"));
     const employees = []
     employeesFirestore.forEach((doc) => {
-        employees.push(doc.data())
+        const employee = doc.data()
+        if(employee.firstName){
+            employee.firstName = decryptItem(employee.firstName)
+            employee.lastName = decryptItem(employee.lastName) 
+            employee.street = decryptItem(employee.street)
+        }
+        employees.push(employee)
     });
     return employees
 }
@@ -46,6 +53,7 @@ const { actions, reducer } = createSlice({
                 const employees = draft.list
                 draft.list = [newEmployee, ...employees]
                 draft.sum++
+                if(draft.status !== "listed"){ draft.status = "listed" }
                 return
             }
         },

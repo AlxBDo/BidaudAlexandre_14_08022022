@@ -4,7 +4,7 @@ const formState = (inputs) => { return {
     status: "to-check", 
     issue: false,
     inputs, 
-    checked: [], 
+    checked: { sum: 0 }, 
     values: {}
 }}
 
@@ -22,11 +22,11 @@ const { actions, reducer } = createSlice({
                 payload : { formId }
             }), 
             reducer: (draft, action) => {
-                if(draft.forms[action.payload.formId] && draft.forms[action.payload.formId].status !== "to-check"){
+                if(draft.forms[action.payload.formId]){
                     draft.forms[action.payload.formId].status = "to-check"
-                    draft.forms[action.payload.formId].checked = []
+                    draft.forms[action.payload.formId].checked = { sum: 0 } 
                     draft.forms[action.payload.formId].issue = false 
-                    draft.forms[action.payload.formId].values = {}
+                    draft.forms[action.payload.formId].values = {} 
                 }
                 return
             }
@@ -53,15 +53,15 @@ const { actions, reducer } = createSlice({
             }),
             reducer: (draft, action) => {
                 const formId = String(action.payload.formId)
-                const inputChecked = draft.forms[formId].checked
                 const inputId = action.payload.inputId
                 const inputs = draft.forms[formId].inputs
-                if(draft.forms[formId] && inputs.indexOf(inputId) >= 0){
-                    draft.forms[formId].checked = [inputId, ...inputChecked] 
+                if(draft.forms[formId] && inputs.indexOf(inputId) >= 0 && !draft.forms[formId].checked[inputId]){
+                    draft.forms[formId].checked[inputId] = true 
+                    draft.forms[formId].checked.sum++
                     if(action.payload.inputValue){
                         draft.forms[formId].values[inputId] = action.payload.inputValue
                     }
-                    if(inputs.length === (inputChecked.length + 1)){
+                    if(inputs.length === draft.forms[formId].checked.sum){
                         draft.forms[formId].status = "checked"
                     }
                 }
@@ -74,11 +74,10 @@ const { actions, reducer } = createSlice({
             }),
             reducer: (draft, action) => {
                 const formId = String(action.payload.formId)
-                const inputChecked = draft.forms[formId].checked
                 const inputId = action.payload.inputId
-                const index = inputChecked.indexOf(inputId)
-                if(draft.forms[formId] && index >= 0){
-                    draft.forms[formId].checked = inputChecked.splice(index, 1)
+                if(draft.forms[formId]){
+                    if(draft.forms[formId].checked[inputId]){ draft.forms[formId].checked.sum-- }
+                    draft.forms[formId].checked[inputId] = false
                     if(draft.forms[formId].values[inputId]){
                         draft.forms[formId].values[inputId] = null
                     }
@@ -96,7 +95,7 @@ const { actions, reducer } = createSlice({
             }),
             reducer: (draft, action) => {
                 const formId = action.payload.formId
-                if(draft.forms[formId] && draft.forms[formId].checked.length === draft.forms[formId].inputs.length){
+                if(draft.forms[formId] && draft.forms[formId].checked.sum === draft.forms[formId].inputs.length){
                     draft.forms[formId].issue = action.payload.submitIssue
                     draft.forms[formId].status = "submited" 
                 }

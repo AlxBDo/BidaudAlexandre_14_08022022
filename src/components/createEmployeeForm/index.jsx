@@ -1,7 +1,5 @@
 import { useDispatch } from "react-redux"
-import { City, DateOfBirth, Department, FirstName, inputsId, LastName, StartDate, States, Street, ZipCode } from "./inputs" 
-import addEmployee from "../../firebase/addEmployee"
-import { decryptItem } from "../../utils/crypt"
+import { City, DateOfBirth, Department, FirstName, inputsId, LastName, StartDate, States, Street, ZipCode } from "./inputs"
 import * as employeesAction from "../../features/employees"
 import { style } from "rh-date-picker/dist/style"
 import Form from "../form"

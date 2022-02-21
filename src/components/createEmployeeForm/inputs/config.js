@@ -33,7 +33,7 @@ const startDate = define("startDate", "Start Date", "date")
 
 const state = defineSelect("state", "State", states)
 
-const street = defineText("street", "Street", 75, 4)
+const street = defineText("street", "Street", 80, 4)
 
 const zipCode = defineInputHtml("zipCode", "Zip Code", 99950, 501, "number")
 

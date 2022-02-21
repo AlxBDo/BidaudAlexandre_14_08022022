@@ -32,9 +32,9 @@ function Input(props){
             id={id} 
             onBlur={(e) => {
                 const value = e.target.value
+                dispatch(validationFormAction.removeCheckedInput(formId, id))
                 if(value){
                     dispatch(errorActions.clear(`${id}-error`))
-                    dispatch(validationFormAction.removeCheckedInput(formId, id))
                     if(isRequired && !checkFunction(value)) {
                         dispatch(errorActions.add({ output: `${id}-error`, what: id, why: "Wrong format" }))
                     } else {

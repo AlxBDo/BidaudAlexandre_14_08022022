@@ -1,5 +1,6 @@
 import { firestoreDb } from "./config"
 import { collection, addDoc } from "firebase/firestore"; 
+import { encryptItem } from "../utils/crypt"
 
 
 export function addEmployee({ 
@@ -14,7 +15,10 @@ export function addEmployee({
     department 
 }){
     try {
-        const docRef = addDoc(collection(firestoreDb, "employees"), {
+      firstName = encryptItem(firstName) 
+      lastName = encryptItem(lastName)
+      street = encryptItem(street)
+        addDoc(collection(firestoreDb, "employees"), {
             firstName, 
             lastName, 
             dateOfBirth, 
@@ -25,7 +29,6 @@ export function addEmployee({
             zipCode, 
             department 
         });
-        console.log("Document written with ID: ", docRef.id);
       } catch (e) {
         console.error("Error adding document: ", e);
       }

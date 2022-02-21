@@ -94,7 +94,7 @@ function SelectInput(id, options){
         }),
       }
     return(
-        <Select id={ id } options={ options } styles={customStyles} value={ validationForm.values[id] ? [validationForm.values[id]] : {label: null, value: null} } isClearable={true} onChange={(e) => {
+        <Select id={ id } options={ options } styles={customStyles} value={ validationForm.values[id] ? [validationForm.values[id]] : null } isClearable={true} onChange={(e) => {
             if(e && e.value){
                 dispatch(validationFormAction.addCheckedInput("createEmployeeForm", id, e))
             } else {
