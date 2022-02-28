@@ -85,7 +85,7 @@ function Employees(){
               title={ "Employees list" }
               data={ datatableEmployeesList } 
               columns={ datatableColumnTitles }
-              options={ {responsive: "simple"} }
+              options={ {responsive: "simple"} } 
           />
           <Link to="/">Home</Link>
         </Page>

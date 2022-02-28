@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { pageDefinition } from "../../style";
+import { styleDef } from "../../style";
 
 export const HeaderStyled = styled.header`
     margin-bottom: 2%;
@@ -7,11 +7,14 @@ export const HeaderStyled = styled.header`
     padding: 1%;
     box-shadow: 0px 1px 10px black;
     align-items: center;
-    ${pageDefinition}
+    background-color: ${ styleDef.headerBgColor };
+    color: ${ styleDef.headerColor };
+    a { color: ${ styleDef.headerColor }; }
     @media (min-width: 501px){
         width: 100%; 
     }
     @media (max-width: 500px){
+        width: 100%
         flex-wrap: wrap;
         h1, h2 { width: 45% }
         h1 { text-align: left } 

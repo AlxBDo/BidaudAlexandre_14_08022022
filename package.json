@@ -32,6 +32,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "cypress:open": "cypress open",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -55,6 +56,12 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.17.5",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "@testing-library/cypress": "^8.0.2",
+    "babel-loader": "^8.2.3",
+    "cypress": "^9.5.0",
     "jest": "^27.5.1"
   }
 }

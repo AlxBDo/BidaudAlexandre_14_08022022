@@ -5,7 +5,14 @@ import { addEmployee } from "../firebase/addEmployee";
 import { selectEmployees } from "../utils/selectors";
 import { decryptItem } from "../utils/crypt";
 
-
+/**
+ * Save new employee to employees list and to FireStore database 
+ * @memberof employees
+ * @param {object} employeeObj 
+ * @returns {boolean} saveResult 
+ * @example `employeesAction.saveEmployee( employeeObj = { firstName: String, lastName: String, dateOfBirth : String, startDate: String, street: String, city: String, state: String, zipCode: Number, department: String } )` 
+ * @see addEmployee 
+ */
 export function saveEmployee(employeeObj){
     return (dispatch, getState) => { 
         const employees = selectEmployees()
@@ -17,6 +24,13 @@ export function saveEmployee(employeeObj){
     }
 }
 
+/**
+ * Fetch employees list to FireStore database and decrypt employee's firstName, lastName and steet
+ * @memberof employees
+ * @returns {array} employeesList 
+ * @example `employeesAction.fetchListFromFirestore()` 
+ * @see decryptItem
+ */
 export async function fetchListFromFirestore(){
     const employeesFirestore = await getDocs(collection(firestoreDb, "employees"));
     const employees = []
@@ -26,8 +40,8 @@ export async function fetchListFromFirestore(){
             employee.firstName = decryptItem(employee.firstName)
             employee.lastName = decryptItem(employee.lastName) 
             employee.street = decryptItem(employee.street)
+            employees.push(employee)
         }
-        employees.push(employee)
     });
     return employees
 }
@@ -39,10 +53,25 @@ const initialState = {
     sum: 0
 }
 
+/**
+ * @typedef {object} employees 
+ * @component 
+ * @description Redux component storing employee information 
+ * @property {function} addEmployeeToList - Add new employee to employees list 
+ * @property {function} setList - Store employees list 
+ */
 const { actions, reducer } = createSlice({
     name: "employees", 
     initialState, 
     reducers: {
+
+        /**
+         * @name addEmployeeToList 
+         * @memberof employees 
+         * @description Add new employee to employees list 
+         * @param {object} employee - Employee to add to list 
+         * @example `employeesAction.addEmployeeToList( employee = { firstName: String, lastName: String, dateOfBirth : String, startDate: String, street: String, city: String, state: String, zipCode: Number, department: String } )` 
+         */
         addEmployeeToList : {
             prepare: (employee) => ({
                 payload: { employee }
@@ -57,6 +86,14 @@ const { actions, reducer } = createSlice({
                 return
             }
         },
+
+        /**
+         * @name setList 
+         * @memberof employees 
+         * @description Store employees list 
+         * @param {array} list - Employees list 
+         * @example `employeesAction.setList( list = [ employeeObject1, employeeObject2, ... ] )` 
+         */
         setList: {
             prepare: (list) => ({
                 payload: { list }

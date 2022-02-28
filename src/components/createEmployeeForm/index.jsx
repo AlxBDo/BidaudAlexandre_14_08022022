@@ -4,7 +4,12 @@ import * as employeesAction from "../../features/employees"
 import { style } from "rh-date-picker/dist/style"
 import Form from "../form"
 
-
+/**
+ * Display Employee Form for creating a new employee. It build with Form Component
+ * @component 
+ * @returns {object} CreateEmployeeForm 
+ * @see Form
+ */
 function CreateEmployeeForm() {
 
     const dispatch = useDispatch()

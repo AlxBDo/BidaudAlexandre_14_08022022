@@ -2,7 +2,6 @@ import DatePicker from 'rh-date-picker/dist/component/datePicker'
 import {currentDate} from "rh-date-picker/dist/utils/date"
 import Select from 'react-select'
 import { useDispatch, useSelector } from 'react-redux'
-
 import { selectValidationForm } from "../../../utils/selectors"
 import * as validationFormAction from "../../../features/validationForm"
 import { config } from './config'
@@ -11,7 +10,15 @@ import ErrorBox from '../../errorBox'
 import { InputCtn, StyledLabel } from "../style"
 import { style } from "rh-date-picker/dist/style";
 
-
+/**
+ * Display DatePicker : date time picker input
+ * @component
+ * @param {object} param 
+ * @param {object} param.id use for html attribute 
+ * @param {object} param.label use for label text 
+ * @param {object} param.type use to define DatePicker type param 
+ * @returns {object} DatePicker
+ */
 function DatePickerInput({id, label, type}){
 
     const dispatch = useDispatch()
@@ -45,6 +52,23 @@ function DatePickerInput({id, label, type}){
     )
 }
 
+/**
+ * Display InputCtn : div contains label and input 
+ * @component
+ * @param {object} param - use define functions to get param object
+ * @see defineInputHtml
+ * @param {object} param.checkFunction - contains onBlur and onChange function to call
+ * @example { onBlur: myFormatCheckFunction() }
+ * @param {string} param.id - use for html attribute 
+ * @param {string} param.label - use for label text 
+ * @param {number} param.max - use for html attribute (define max-length for text input) 
+ * @param {number} param.min - use for html attribute (define min-length for text input) 
+ * @param {object} param.type - use to define DatePicker type param 
+ * @returns {object} InputCtn 
+ * @example `<InputCtn> <StyledLabel> My Label </StyledLabel> <Input /> </InputCtn>`
+ * @see Input 
+ * @see SelectInput
+ */
 function InputBox({ checkFunction, id, label, max, min, required, type, options = false }){
     return(
         <InputCtn>
@@ -66,9 +90,25 @@ function InputBox({ checkFunction, id, label, max, min, required, type, options 
     )
 }
 
+/**
+ * Display Select : react-select module 
+ * @component
+ * @param {object} param - use define functions to get param object
+ * @see defineSelect
+ * @param {string} param.id - use for html attribute 
+ * @param {array} options - contains objects defining select options 
+ * @returns {object} Select 
+ * @example 
+ * <Select id={ id } options={ options } />
+ */
 function SelectInput(id, options){
+
     const dispatch = useDispatch()
+
+    // use to store and get option selected value
     const validationForm = useSelector(selectValidationForm("createEmployeeForm"))
+
+    // define select style
     const customStyles = {
         container: (provided) => ({
             ...provided,
@@ -92,7 +132,8 @@ function SelectInput(id, options){
             ...provided,
             color: style.color()
         }),
-      }
+    }
+
     return(
         <Select id={ id } options={ options } styles={customStyles} value={ validationForm.values[id] ? [validationForm.values[id]] : null } isClearable={true} onChange={(e) => {
             if(e && e.value){

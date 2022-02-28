@@ -4,7 +4,13 @@ import PropTypes from "prop-types"
 
 import { AdviceP, ErrorCtn, ErrorP } from "./style"
 
-
+/**
+ * Provides message indicating maximum and minimum values ​​accepted.
+ * @param {number} max 
+ * @param {number} min 
+ * @param {string} type - accept "string" or "number" 
+ * @returns {string} limitMessage
+ */
 function limitMessage(max, min, type = "text"){
         return max > 0 ? `and ${type === "text" ? "number of characters" : "value"} must be between ${min} and ${max}.` : "."
 }
@@ -22,6 +28,17 @@ ErrorBox.propTypes = {
     min: PropTypes.number
 }
 
+/**
+ * Display error messages 
+ * @component 
+ * @param {object} props 
+ * @param {string} props.inputId - use for html attribute id 
+ * and recover the errors transmitted by the control functions of the corresponding input 
+ * @param {string} props.inputName - Input name whose ErrorBox should display errors 
+ * @param {number} props.max - Maximum allowed value (maximum length for a string) 
+ * @param {number} props.min - Minimum allowed value (minimum length for a string) 
+ * @returns {object} errorBox
+ */
 function ErrorBox(props){
 
     const { inputId, inputName, max, min } = props

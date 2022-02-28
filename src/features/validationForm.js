@@ -13,10 +13,28 @@ const initialState = {
     forms: {} 
 }
 
+/**
+ * @typedef {object} validationForm 
+ * @component 
+ * @description Redux component storing information relating to the validation of forms created with the Form component. 
+ * @property {function} clearForm - Deletes the information from the form corresponding to the id passed as an argument.
+ * @property {function} addForm - Add new form to state.
+ * @property {function} addCheckedInput - Add an input to the list of validated inputs
+ * @property {function} removeCheckedInput - Remove an input to the list of validated inputs. 
+ * @property {function} submitForm - Change the state to "submitted" and add an issue if necessary.
+ */
 const { actions, reducer } = createSlice({
     name: "validationForm", 
     initialState,
     reducers: {
+
+        /**
+         * @name clearForm 
+         * @memberof validationForm 
+         * @description Deletes the information from the form corresponding to the id passed as an argument. 
+         * @param {string} formId - Form id to clean 
+         * @example `validationFormAction.clearForm( myFormId )`
+         */
         clearForm: {
             prepare: (formId) => ({
                 payload : { formId }
@@ -31,6 +49,15 @@ const { actions, reducer } = createSlice({
                 return
             }
         },
+        
+        /**
+         * @name addForm 
+         * @memberof validationForm 
+         * @description Add new form to state. 
+         * @param {string} formId - Form id
+         * @param {array} inputs - Inputs id array 
+         * @example `validationFormAction.addForm( myFormId, inputs = [ input1Id, input2Id, ... ] )`
+         */
         addForm: {
             prepare: (formId, inputs) => ({
                 payload: {formId, inputs}
@@ -47,6 +74,16 @@ const { actions, reducer } = createSlice({
                 return
             }
         }, 
+        
+        /**
+         * @name addCheckedInput 
+         * @memberof validationForm 
+         * @description Add an input to the list of validated inputs. 
+         * @param {string} formId - Form id  
+         * @param {string} inputId - Input id  
+         * @param {string | number | boolean} [false] inputValue - Input value to store
+         * @example `validationFormAction.addCheckedInput( myFormId, inputId, inputValue = false )`
+         */
         addCheckedInput: {
             prepare: (formId, inputId, inputValue = false) => ({
                 payload: {formId, inputId, inputValue}
@@ -68,6 +105,15 @@ const { actions, reducer } = createSlice({
                 return 
             }
         }, 
+        
+        /**
+         * @name removeCheckedInput 
+         * @memberof validationForm 
+         * @description Remove an input to the list of validated inputs. 
+         * @param {string} formId - Form id to clean 
+         * @param {string} inputId - Input id  
+         * @example `validationFormAction.removeCheckedInput( myFormId, inputId )`
+         */
         removeCheckedInput: {
             prepare: (formId, inputId) => ({
                 payload: {formId, inputId}
@@ -89,6 +135,15 @@ const { actions, reducer } = createSlice({
                 return 
             }
         }, 
+        
+        /**
+         * @name submitForm 
+         * @memberof validationForm 
+         * @description Change the state to "submitted" and add an issue if necessary. 
+         * @param {string} formId - Form id to submit 
+         * @param {string} submitIssue - Message informing of the validation of the formulation displayed at its submission
+         * @example `validationFormAction.submitForm( myFormId, submitIssue = false )`
+         */
         submitForm: {
             prepare: (formId, submitIssue) => ({
                 payload: { formId, submitIssue }

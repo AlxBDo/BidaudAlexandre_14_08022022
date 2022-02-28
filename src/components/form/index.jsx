@@ -41,6 +41,18 @@ Form.defaultProps = {
     submitButtonText: "Submit"
 }
 
+/**
+ * Displays a customizable form with a modal indicating the submit result (Use react-modal plugin). 
+ * @component
+ * @param {object} props 
+ * @param {string} props.formId - use for html attribute id 
+ * @param {array} props.inputsId - Inputs id list 
+ * @param {string} props.modalContentLabel - Modal label text (react-modal parameter) 
+ * @param {object} props.modalStyle - Modal style options (react-modal parameter) 
+ * @param {string} props.submitButtonText - Submit button text 
+ * @param {function} props.submitFunction - When form is submitted, array of input values ​​is passed to it as an argument.
+ * @returns {object} Form
+ */
 function Form(props) {
 
     const { children, formId, inputsId, modalContentLabel, modalStyle, submitButtonText, submitFunction } = props
@@ -58,6 +70,7 @@ function Form(props) {
             <ValidationSection>
                 <SubmitButton 
                     disabled={ validationForm.status !== "checked" } 
+                    data-testid="submit-btn" 
                     onClick={() => {
                         submitFunction(getValueAndClearInputs(inputsId)).then( (issue) => {
                             if(issue){  
@@ -86,7 +99,7 @@ function Form(props) {
                     style={ modalStyle }
                 > 
                     <div>
-                        <p>{ modalParams.message }</p>
+                        <p data-testid="modal-msg">{ modalParams.message }</p>
                         <p> This message will automatically close in few seconds. You can also click close button, 
                             outside the dialog box or press "Esc". </p>
                     </div> 

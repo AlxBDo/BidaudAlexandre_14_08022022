@@ -3,7 +3,9 @@ import { style } from 'rh-date-picker/dist/style'
 
 
 export const styleDef = {
-    padding: "5px 10px"
+    padding: "5px 10px", 
+    headerBgColor: "#93ad18", 
+    headerColor: style.backgroundColor()
 }
 
 export const pageDefinition = `
