@@ -1,0 +1,30 @@
+{
+    "source": {
+        "include": [
+            "src/components",  
+            "src/features", 
+            "src/firebase", 
+            "src/pages", 
+            "src/utils"
+        ],
+        "includePattern": ".+\\.js(doc|x)?$",
+        "excludePattern": "(node_modules/|docs)"
+    },
+    "plugins": ["plugins/markdown"
+    ],
+    "templates": {
+        "cleverlinks":true,
+        "monospacelinks": true,
+        "default": {
+            "useLongnameInNav": true
+        },
+        "better-docs": {
+            "name": "HRnet"
+          }
+    },
+    "opts": {
+        "recurse": true,
+        "destination": "./docs/",
+        "readme": "README.md"
+    }
+}

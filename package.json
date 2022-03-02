@@ -16,6 +16,7 @@
     "crypto-js": "^4.1.1",
     "firebase": "^9.6.7",
     "immer": "^9.0.12",
+    "jsdoc": "^3.6.10",
     "mui-datatables": "^4.0.0",
     "prop-types": "^15.8.1",
     "react": "^17.0.2",
@@ -26,7 +27,7 @@
     "react-scripts": "5.0.0",
     "react-select": "^5.2.2",
     "redux": "^4.1.2",
-    "rh-date-picker": "^0.1.6",
+    "rh-date-picker": "^0.1.7",
     "styled-components": "^5.3.3",
     "web-vitals": "^2.1.4"
   },
@@ -35,7 +36,8 @@
     "cypress:open": "cypress open",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "doc": "jsdoc -c jsdoc.json"
   },
   "eslintConfig": {
     "extends": [
@@ -61,6 +63,7 @@
     "@babel/preset-react": "^7.16.7",
     "@testing-library/cypress": "^8.0.2",
     "babel-loader": "^8.2.3",
+    "better-docs": "^2.7.2",
     "cypress": "^9.5.0",
     "jest": "^27.5.1"
   }

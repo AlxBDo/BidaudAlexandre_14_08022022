@@ -1,4 +1,32 @@
-import DatePicker from 'rh-date-picker/dist/component/datePicker'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/createEmployeeForm/inputs/index.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/createEmployeeForm/inputs/index.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import DatePicker from 'rh-date-picker/dist/component/datePicker'
 import {currentDate} from "rh-date-picker/dist/utils/date"
 import Select from 'react-select'
 import { useDispatch, useSelector } from 'react-redux'
@@ -24,7 +52,7 @@ function DatePickerInput({id, label, type}){
 
     const dispatch = useDispatch()
     
-    const deadlines = id === "dateOfBirth" && {
+    const deadlines = id === "dateOfBirth" &amp;&amp; {
         max: `${currentDate.day}-${currentDate.month}-${parseInt(currentDate.year - 14)}`, 
         min: `${currentDate.day}-${currentDate.month}-${parseInt(currentDate.year - 70)}`
     }
@@ -42,7 +70,7 @@ function DatePickerInput({id, label, type}){
     const htmlClass = { container: "hrnet-input-ctn"}
     
     return(
-        <DatePicker 
+        &lt;DatePicker 
             inputId={ id } 
             label={ label } 
             deadlines= { deadlines }
@@ -67,17 +95,17 @@ function DatePickerInput({id, label, type}){
  * @param {number} param.min - use for html attribute (define min-length for text input) 
  * @param {object} param.type - use to define DatePicker type param 
  * @returns {object} InputCtn 
- * @example `<InputCtn> <StyledLabel> My Label </StyledLabel> <Input /> </InputCtn>`
+ * @example `&lt;InputCtn> &lt;StyledLabel> My Label &lt;/StyledLabel> &lt;Input /> &lt;/InputCtn>`
  * @see Input 
  * @see SelectInput
  */
 function InputBox({ checkFunction, id, label, max, min, required, type, options = false }){
     return(
-        <InputCtn>
-            <StyledLabel htmlFor={ id }>{ label }</StyledLabel>
+        &lt;InputCtn>
+            &lt;StyledLabel htmlFor={ id }>{ label }&lt;/StyledLabel>
             { type === "select" ? SelectInput(id, options) 
             : (
-                <Input 
+                &lt;Input 
                     checkFunction={checkFunction}
                     id={id} 
                     formId={"createEmployeeForm"}
@@ -87,8 +115,8 @@ function InputBox({ checkFunction, id, label, max, min, required, type, options 
                     type={type} 
                 />
             )}
-            <ErrorBox inputId={id} inputName={label} max={max} min={min} />
-        </InputCtn>
+            &lt;ErrorBox inputId={id} inputName={label} max={max} min={min} />
+        &lt;/InputCtn>
     )
 }
 
@@ -101,7 +129,7 @@ function InputBox({ checkFunction, id, label, max, min, required, type, options 
  * @param {array} options - contains objects defining select options 
  * @returns {object} Select 
  * @example 
- * <Select id={ id } options={ options } />
+ * &lt;Select id={ id } options={ options } />
  */
 function SelectInput(id, options){
 
@@ -137,8 +165,8 @@ function SelectInput(id, options){
     }
 
     return(
-        <Select id={ id } options={ options } styles={customStyles} value={ validationForm.values[id] ? [validationForm.values[id]] : null } isClearable={true} onChange={(e) => {
-            if(e && e.value){
+        &lt;Select id={ id } options={ options } styles={customStyles} value={ validationForm.values[id] ? [validationForm.values[id]] : null } isClearable={true} onChange={(e) => {
+            if(e &amp;&amp; e.value){
                 dispatch(validationFormAction.addCheckedInput("createEmployeeForm", id, e))
             } else {
                 dispatch(validationFormAction.removeCheckedInput("createEmployeeForm", id))
@@ -166,4 +194,26 @@ export const StartDate = () => DatePickerInput(config.startDate)
 
 export const Street = () => InputBox(config.street) 
 
-export const ZipCode = () => InputBox(config.zipCode)
+export const ZipCode = () => InputBox(config.zipCode)</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addEmployee">addEmployee</a></li><li><a href="global.html#CreateEmployeeForm">CreateEmployeeForm</a></li><li><a href="global.html#DatePickerInput">DatePickerInput</a></li><li><a href="global.html#decryptItem">decryptItem</a></li><li><a href="global.html#define">define</a></li><li><a href="global.html#defineInputHtml">defineInputHtml</a></li><li><a href="global.html#defineSelect">defineSelect</a></li><li><a href="global.html#defineText">defineText</a></li><li><a href="global.html#encryptItem">encryptItem</a></li><li><a href="global.html#Error">Error</a></li><li><a href="global.html#ErrorBox">ErrorBox</a></li><li><a href="global.html#Form">Form</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Input">Input</a></li><li><a href="global.html#InputBox">InputBox</a></li><li><a href="global.html#limitMessage">limitMessage</a></li><li><a href="global.html#SelectInput">SelectInput</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Wed Mar 02 2022 15:52:10 GMT+0100 (heure normale d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

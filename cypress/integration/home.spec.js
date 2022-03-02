@@ -10,6 +10,31 @@ describe("Home page", () => {
         cy.get('[data-testid=header-link').contains("Employees List")
     })
 
+    it("Should add form in validationForm.forms state", () => {
+        cy.window().its("store").invoke("getState").its("validationForm").should("deep.equal", {
+            status:'on',
+            forms:{
+                createEmployeeForm:{
+                    status:'to-check',
+                    issue:false,
+                    inputs: [
+                        'city',
+                        'dateOfBirth',
+                        'department',
+                        'firstName',
+                        'lastName',
+                        'startDate',
+                        'state',
+                        'street',
+                        'zipCode'
+                    ],
+                    checked:{sum:0},
+                    values:{}
+                }
+            }
+        })
+    })
+
     it("Should display an error message if first name entered does not respect the authorized format.", () => {
         cy.get("#firstName").type("pierre5") 
         cy.get("#firstName-error").contains("First Name does not respect the required format.") 

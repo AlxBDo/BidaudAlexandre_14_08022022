@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { style, theme } from "rh-date-picker/dist/style"
 import { styleDef } from "../../style";
+import { style, theme } from "rh-date-picker/dist/style"
 
 
 export const defaultFlex = `

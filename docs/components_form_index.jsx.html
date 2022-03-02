@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/form/index.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/form/index.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { useDispatch, useSelector } from "react-redux"
+import PropTypes from "prop-types"
+import ReactModal from "react-modal"
+
+import { InputsSection, StyledForm, SubmitButton, ValidationSection } from "./style"
+import * as validationFormAction from "../../features/validationForm"
+import { selectValidationForm } from "../../utils/selectors"
+
+
+function getValueAndClearInputs(inputsId){
+    const inputs = {}
+    inputsId.forEach( (inputId) => {
+        const ipt = document.getElementById(inputId)
+        const value = ipt.value ?? ipt.textContent
+        if(ipt.value){ ipt.value = "" }
+        inputs[inputId] = value
+    })
+    return inputs
+}
+
+const modalParams = {
+    message: false,
+    set: (formState, issue) => {
+        modalParams.submit = formState === "submited" ? true : false
+        if(issue){ modalParams.message = issue }
+    },
+    submit : false,
+}
+
+
+Form.propTypes = {
+    formId: PropTypes.string.isRequired, 
+    inputsId: PropTypes.array.isRequired, 
+    modalContentLabel: PropTypes.string.isRequired, 
+    modalStyle: PropTypes.object,  
+    submitButtonText: PropTypes.string, 
+    submitFunction: PropTypes.func.isRequired
+}
+
+Form.defaultProps = {
+    submitButtonText: "Submit"
+}
+
+/**
+ * Displays a customizable form with a modal indicating the submit result (Use react-modal plugin). 
+ * @component
+ * @param {object} props 
+ * @param {string} props.formId - use for html attribute id 
+ * @param {array} props.inputsId - Inputs id list 
+ * @param {string} props.modalContentLabel - Modal label text (react-modal parameter) 
+ * @param {object} props.modalStyle - Modal style options (react-modal parameter) 
+ * @param {string} props.submitButtonText - Submit button text 
+ * @param {function} props.submitFunction - When form is submitted, array of input values ​​is passed to it as an argument.
+ * @returns {object} Form
+ */
+function Form(props) {
+
+    const { children, formId, inputsId, modalContentLabel, modalStyle, submitButtonText, submitFunction } = props
+    const dispatch = useDispatch()
+    dispatch(validationFormAction.addForm(formId, inputsId))
+    const validationForm = useSelector(selectValidationForm(formId))
+    modalParams.set(validationForm.status, validationForm.issue)
+
+    return(
+
+        &lt;StyledForm onSubmit={(e) => e.preventDefault()} id={formId}>
+
+            &lt;InputsSection> {children} &lt;/InputsSection>
+
+            &lt;ValidationSection>
+                &lt;SubmitButton 
+                    disabled={ validationForm.status !== "checked" } 
+                    data-testid="submit-btn" 
+                    onClick={() => {
+                        submitFunction(getValueAndClearInputs(inputsId)).then( (issue) => {
+                            if(issue){  
+                                dispatch(validationFormAction.submitForm(formId, issue))
+                            }
+                        })}
+                    }
+                >{ submitButtonText }&lt;/SubmitButton>
+                
+                &lt;ReactModal 
+                    appElement={ document.getElementById(formId)}
+                    closeTimeoutMS={1500} 
+                    contentLabel={modalContentLabel} 
+                    id={`${formId}-validation-modal`}
+                    isOpen={ modalParams.submit } 
+                    onAfterOpen={ () => {
+                        setTimeout( () => {
+                            if(modalParams.submit){
+                                dispatch(validationFormAction.clearForm(formId))
+                            }
+                        } , 2000)
+                    } }
+                    onRequestClose={ () => dispatch(validationFormAction.clearForm(formId)) }
+                    shouldCloseOnEsc={ true } 
+                    shouldCloseOnOverlayClick={ true } 
+                    style={ modalStyle }
+                > 
+                    &lt;div>
+                        &lt;p data-testid="modal-msg">{ modalParams.message }&lt;/p>
+                        &lt;p> This message will automatically close in few seconds. You can also click close button, 
+                            outside the dialog box or press "Esc". &lt;/p>
+                    &lt;/div> 
+                    &lt;button onClick={ () => dispatch(validationFormAction.clearForm(formId)) }>Close&lt;/button>
+                &lt;/ReactModal>
+            &lt;/ValidationSection>
+            
+        &lt;/StyledForm>
+
+    )
+}
+
+export default Form</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addEmployee">addEmployee</a></li><li><a href="global.html#CreateEmployeeForm">CreateEmployeeForm</a></li><li><a href="global.html#DatePickerInput">DatePickerInput</a></li><li><a href="global.html#decryptItem">decryptItem</a></li><li><a href="global.html#define">define</a></li><li><a href="global.html#defineInputHtml">defineInputHtml</a></li><li><a href="global.html#defineSelect">defineSelect</a></li><li><a href="global.html#defineText">defineText</a></li><li><a href="global.html#encryptItem">encryptItem</a></li><li><a href="global.html#Error">Error</a></li><li><a href="global.html#ErrorBox">ErrorBox</a></li><li><a href="global.html#Form">Form</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Input">Input</a></li><li><a href="global.html#InputBox">InputBox</a></li><li><a href="global.html#limitMessage">limitMessage</a></li><li><a href="global.html#SelectInput">SelectInput</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Wed Mar 02 2022 15:52:10 GMT+0100 (heure normale d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

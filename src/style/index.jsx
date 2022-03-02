@@ -1,16 +1,20 @@
 import styled from 'styled-components'
 import { style } from 'rh-date-picker/dist/style'
 
+const colors = { dark: "#383F51", light: "#DDDBF1", advice: "#93AD18", error: "#D81159" }
+
+style.setColors(colors)
 
 export const styleDef = {
     padding: "5px 10px", 
-    headerBgColor: "#93ad18", 
-    headerColor: style.backgroundColor()
+    headerBgColor: colors.advice, 
+    headerColor: style.backgroundColor(), 
+    colors
 }
 
 export const pageDefinition = `
-    background-color: ${ style.backgroundColor() };
-    color: ${ style.color() }
+    background-color: ${ style.page.bgColor() };
+    color: ${ style.page.color() }
     @media (max-width: 500px){
         width: 100%
     };

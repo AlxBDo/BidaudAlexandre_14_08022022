@@ -1,9 +1,25 @@
 import { useDispatch, useSelector } from "react-redux"
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom" 
+import { style, theme } from 'rh-date-picker/dist/style';
+import { ThemeProvider } from "@mui/styles";
+import { createTheme } from "@mui/material/styles";
 import MUIDatatable from "mui-datatables"
 import { selectEmployees } from "../../utils/selectors"
 import { Page } from "../../style"
 import * as employeesAction from "../../features/employees"
+
+const getMuiTheme = () => createTheme({
+  theme,
+  palette: {
+    primary: {
+      main: style.page.color(),
+    },
+    background: {
+      default: style.backgroundColor(),
+    },
+  },
+})
+
 
 function Employees(){
 
@@ -81,13 +97,15 @@ function Employees(){
     
     return (
         <Page>
-          <MUIDatatable 
-              title={ "Employees list" }
-              data={ datatableEmployeesList } 
-              columns={ datatableColumnTitles }
-              options={ {responsive: "simple"} } 
-          />
-          <Link to="/">Home</Link>
+          <ThemeProvider theme={ getMuiTheme() }>
+            <MUIDatatable 
+                title={ "Employees list" }
+                data={ datatableEmployeesList } 
+                columns={ datatableColumnTitles }
+                options={ {responsive: "simple"} } 
+            />
+            <Link to="/">Home</Link>
+          </ThemeProvider>
         </Page>
     )
 

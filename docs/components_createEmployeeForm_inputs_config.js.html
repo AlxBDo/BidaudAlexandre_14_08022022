@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/createEmployeeForm/inputs/config.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/createEmployeeForm/inputs/config.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { departments, states } from "./selectOptions"
+import { format } from './validation'
+
+/**
+ * Provide object contains params use to create inputs 
+ * @param {string} id - use for html attribute
+ * @param {string} label - text display to label
+ * @param {string} type - use for input html attribute (number, text, ...)
+ * @param {boolean} required - use for input html attribute. 
+ * @returns {object} 
+ * @example { id: "myInputId", label: "My label text", type: "text", required: true }
+ */
+function define(id, label, type, required = true) { return { id, label, required, type } }
+
+/**
+ * Provide object contains params use to create inputs 
+ * @param {string} id - use for html attribute
+ * @param {string} label - text display to label
+ * @param {number} max - use for html attribute (define maxLength for text input)
+ * @param {number} min - use for html attribute (define minLength for text input)
+ * @param {string} type - use for input html attribute (number, text, ...)
+ * @param {boolean} required - use for input html attribute. 
+ * @returns {object} 
+ * @example { id: "myInputId", label: "My label text", max: 50, min: 2, type: "text", required: true }
+ */
+ function defineInputHtml(id, label, max, min, type, required = true) { 
+    type = type === "text" ? id !== "street" ? "name" : "adress" : type 
+    const checkFunction = (valueToCheck) => format.check(valueToCheck, {type, max, min})
+    return { checkFunction, max, min, ...define(id, label, type, required) } 
+}
+
+/**
+ * Provide object contains params use to create select inputs 
+ * @param {string} id - use for html attribute
+ * @param {string} label - text display to label
+ * @param {array} options - contains objects defining select options 
+ * @param {boolean} required - use for input html attribute. 
+ * @returns {object} 
+ * @example { id: "myInputId", label: "My label text", options: [ { label: "option 1", value: 1 }, ... ], type: "select", required: true }
+ */
+ function defineSelect(id, label, options, required = true){
+    return { options, ...define(id, label, "select", required) } 
+}
+
+/**
+ * Provide object contains params use to create inputs 
+ * @param {string} id - use for html attribute
+ * @param {string} label - text display to label
+ * @param {number} max - use to define max length allowed 
+ * @param {number} min - use to define min length allowed
+ * @param {boolean} required - use for input html attribute. 
+ * @returns {object} 
+ * @example { id: "myInputId", label: "My label text", max: 50, min: 2, type: "text", required: true }
+ */
+function defineText(id, label, max = 30, min = 2, required = true) { 
+    return defineInputHtml(id, label, max, min, "text", required) 
+}
+
+
+const city = defineText("city", "City", 50)
+
+const dateOfBirth = define("dateOfBirth", "Date of Birth", "date")
+
+const department = defineSelect("department", "Department", departments)
+
+const firstName = defineText("firstName", "First Name") 
+
+const lastName = defineText("lastName", "Last Name")
+
+const startDate = define("startDate", "Start Date", "date") 
+
+const state = defineSelect("state", "State", states)
+
+const street = defineText("street", "Street", 80, 4)
+
+const zipCode = defineInputHtml("zipCode", "Zip Code", 99950, 501, "number")
+
+
+export const config = { 
+    city, 
+    dateOfBirth, 
+    department, 
+    firstName, 
+    lastName, 
+    startDate, 
+    state, 
+    street, 
+    zipCode
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addEmployee">addEmployee</a></li><li><a href="global.html#CreateEmployeeForm">CreateEmployeeForm</a></li><li><a href="global.html#DatePickerInput">DatePickerInput</a></li><li><a href="global.html#decryptItem">decryptItem</a></li><li><a href="global.html#define">define</a></li><li><a href="global.html#defineInputHtml">defineInputHtml</a></li><li><a href="global.html#defineSelect">defineSelect</a></li><li><a href="global.html#defineText">defineText</a></li><li><a href="global.html#encryptItem">encryptItem</a></li><li><a href="global.html#Error">Error</a></li><li><a href="global.html#ErrorBox">ErrorBox</a></li><li><a href="global.html#Form">Form</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Input">Input</a></li><li><a href="global.html#InputBox">InputBox</a></li><li><a href="global.html#limitMessage">limitMessage</a></li><li><a href="global.html#SelectInput">SelectInput</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Wed Mar 02 2022 15:52:10 GMT+0100 (heure normale d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

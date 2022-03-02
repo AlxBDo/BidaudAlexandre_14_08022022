@@ -1,70 +1,102 @@
-# Getting Started with Create React App
+# HRnet 
+[![forthebadge](https://alxbdo.github.io/RHDatePicker/src/img/made-with-react.svg)](https://forthebadge.com) 
+[![forthebadge](https://alxbdo.github.io/RHDatePicker/src/img/use-react-redux.svg)](https://forthebadge.com) 
+[![forthebadge](https://alxbdo.github.io/BidaudAlexandre_14_08022022/public/use-crypto-js.svg)](https://forthebadge.com) 
+[![forthebadge](https://alxbdo.github.io/BidaudAlexandre_14_08022022/public/use-cypress.svg)](https://forthebadge.com) 
+[![forthebadge](https://alxbdo.github.io/BidaudAlexandre_14_08022022/public/use-firestore.svg)](https://forthebadge.com) 
+[![forthebadge](https://alxbdo.github.io/BidaudAlexandre_14_08022022/public/use-mui-datatables.svg)](https://forthebadge.com) 
+[![forthebadge](https://alxbdo.github.io/BidaudAlexandre_14_08022022/public/use-prop-type.svg)](https://forthebadge.com) 
+[![forthebadge](https://alxbdo.github.io/BidaudAlexandre_14_08022022/public/use-react-modal.svg)](https://forthebadge.com) 
+[![forthebadge](https://alxbdo.github.io/BidaudAlexandre_14_08022022/public/use-react-select.svg)](https://forthebadge.com) 
+[![forthebadge](https://alxbdo.github.io/BidaudAlexandre_14_08022022/public/use-rhdatepicker.svg)](https://forthebadge.com) 
+[![forthebadge](https://alxbdo.github.io/BidaudAlexandre_14_08022022/public/use-styled-components.svg)](https://forthebadge.com) 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+HRnet is an internal responsive application for Human Resources of Health Wealth group.
 
-## Available Scripts
+![ScreenShot](https://alxbdo.github.io/BidaudAlexandre_14_08022022/public/desktop-view.png) 
+![ScreenShot](https://alxbdo.github.io/BidaudAlexandre_14_08022022/public/desktop-view-ligth.png) 
 
-In the project directory, you can run:
+![ScreenShot](https://alxbdo.github.io/BidaudAlexandre_14_08022022/public/tab-view.png) 
+![ScreenShot](https://alxbdo.github.io/BidaudAlexandre_14_08022022/public/tab-view-light.png) 
 
-### `npm start`
+![ScreenShot](https://alxbdo.github.io/BidaudAlexandre_14_08022022/public/mobile-view.png) 
+![ScreenShot](https://alxbdo.github.io/BidaudAlexandre_14_08022022/public/mobile-view-ligth.png) 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Table of contents 
 
-### `npm test`
+* [Author](#1-author)
+* [Technologies](#2-technologies)
+* [Project](#3-project)
+    * [Prerequisites](#31-prerequisites) 
+    * [Lunching the project](#32-launching-the-project)
+* [Documentation](#4-documenation) 
+* [NPM Package](#5-npm-package)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## 1. Author
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Alexandre Bidaud
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 2. Technologies
 
-### `npm run eject`
+- JS 
+- CSS 
+- HTML 
+- NodeJs
+- React 
+- React-Router-Dom  
+- React-Redux 
+- Redux-toolkit 
+- Immer 
+- Styled-components 
+- Prop-Type 
+- React-Modal 
+- React-Select 
+- MUI-Datatables 
+- Cypress 
+- Firebase Firestore 
+- Crypto-js 
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 3. Project
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 3.1 Prerequisites
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- [NodeJS (**version 12.18**)](https://nodejs.org/en/)
+- [React](https://reactjs.org/) 
+- [React-Redux](https://react-redux.js.org/introduction/getting-started) 
+- [Redux-toolkit](https://redux-toolkit.js.org/introduction/getting-started) 
+- [Immer](https://immerjs.github.io/immer/) 
+- [Styled-components](https://styled-components.com/) 
+- [Prop-Types](https://www.npmjs.com/package/prop-types) 
+- [React-Modal](https://reactcommunity.org/react-modal/) 
+- [React-Select](https://react-select.com/home) 
+- [MUI-Datatables](https://openbase.com/js/mui-datatables/documentation) 
+- [Cypress](https://docs.cypress.io/guides/getting-started/installing-cypress) 
+- [Firebase Firestore](https://firebase.google.com/docs/firestore) 
+- [Crypto-js](https://www.npmjs.com/package/crypto-js) 
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 3.2 Launching the project
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Clone it on your computer :
 
-### Code Splitting
+    * github -> green code button -> clone -> copy link
+    ![ScreenShot](https://alxbdo.github.io/BidaudAlexandre_12_02112021/src/assets/clone_repo.jpg)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+    * In your terminal 
+``` git clone https://github.com/AlxBDo/BidaudAlexandre_14_08022022.git ```
 
-### Analyzing the Bundle Size
+- `npm` installation : ``` npm install ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- `yarn` installation : ``` npm install yarn``` 
 
-### Making a Progressive Web App
+- Lunch the project : ``` yarn start ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+## 4 Documenation
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+The documentation can be viewed by following the link below : [documentation](https://alxbdo.github.io/BidaudAlexandre_14_08022022/docs/index.html) 
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

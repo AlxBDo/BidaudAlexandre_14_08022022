@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: features/employees.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: features/employees.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { createSlice } from "@reduxjs/toolkit";
+import { collection, getDocs } from "firebase/firestore"; 
+import { firestoreDb } from "../firebase/config";
+import { addEmployee } from "../firebase/addEmployee";
+import { selectEmployees } from "../utils/selectors";
+import { decryptItem } from "../utils/crypt";
+
+/**
+ * Save new employee to employees list and to FireStore database 
+ * @memberof employees
+ * @param {object} employeeObj 
+ * @returns {boolean} saveResult 
+ * @example `employeesAction.saveEmployee( employeeObj = { firstName: String, lastName: String, dateOfBirth : String, startDate: String, street: String, city: String, state: String, zipCode: Number, department: String } )` 
+ * @see addEmployee 
+ */
+export function saveEmployee(employeeObj){
+    return (dispatch, getState) => { 
+        const employees = selectEmployees()
+        const employeesList = employees(getState()).list
+        if(employeesList.find(element => JSON.stringify(element) === JSON.stringify(employeeObj))){ return false }
+        addEmployee(employeeObj)
+        dispatch(actions.addEmployeeToList(employeeObj)) 
+        return true
+    }
+}
+
+/**
+ * Fetch employees list to FireStore database and decrypt employee's firstName, lastName and steet
+ * @memberof employees
+ * @returns {array} employeesList 
+ * @example `employeesAction.fetchListFromFirestore()` 
+ * @see decryptItem
+ */
+export async function fetchListFromFirestore(){
+    const employeesFirestore = await getDocs(collection(firestoreDb, "employees"));
+    const employees = []
+    employeesFirestore.forEach((doc) => {
+        const employee = doc.data()
+        if(employee.firstName){
+            employee.firstName = decryptItem(employee.firstName)
+            employee.lastName = decryptItem(employee.lastName) 
+            employee.street = decryptItem(employee.street)
+            employees.push(employee)
+        }
+    });
+    return employees
+}
+
+
+const initialState = {
+    status : "void", 
+    list: [], 
+    sum: 0
+}
+
+/**
+ * @typedef {object} employees 
+ * @component 
+ * @description Redux component storing employee information 
+ * @property {function} addEmployeeToList - Add new employee to employees list 
+ * @property {function} setList - Store employees list 
+ */
+const { actions, reducer } = createSlice({
+    name: "employees", 
+    initialState, 
+    reducers: {
+
+        /**
+         * @name addEmployeeToList 
+         * @memberof employees 
+         * @description Add new employee to employees list 
+         * @param {object} employee - Employee to add to list 
+         * @example `employeesAction.addEmployeeToList( employee = { firstName: String, lastName: String, dateOfBirth : String, startDate: String, street: String, city: String, state: String, zipCode: Number, department: String } )` 
+         */
+        addEmployeeToList : {
+            prepare: (employee) => ({
+                payload: { employee }
+            }),
+            reducer: (draft, action) => {
+                const newEmployee = typeof action.payload.employee === "object" &amp;&amp; action.payload.employee
+                if(!newEmployee){ return }
+                const employees = draft.list
+                draft.list = [newEmployee, ...employees]
+                draft.sum++
+                if(draft.status !== "listed"){ draft.status = "listed" }
+                return
+            }
+        },
+
+        /**
+         * @name setList 
+         * @memberof employees 
+         * @description Store employees list 
+         * @param {array} list - Employees list 
+         * @example `employeesAction.setList( list = [ employeeObject1, employeeObject2, ... ] )` 
+         */
+        setList: {
+            prepare: (list) => ({
+                payload: { list }
+            }), 
+            reducer: (draft, action) => {
+                if(draft.status !== "void"){ return }
+                const employeesList = action.payload.list
+                if(Array.isArray(employeesList) &amp;&amp; employeesList.length > 0){
+                    draft.list = employeesList 
+                    draft.sum = employeesList.length 
+                    draft.status = "listed"
+                } else {
+                    draft.status = "empty"
+                }
+                return
+            }
+        }
+    }
+})
+
+export const { addEmployeeToList, setList } = actions 
+
+export default reducer</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addEmployee">addEmployee</a></li><li><a href="global.html#CreateEmployeeForm">CreateEmployeeForm</a></li><li><a href="global.html#DatePickerInput">DatePickerInput</a></li><li><a href="global.html#decryptItem">decryptItem</a></li><li><a href="global.html#define">define</a></li><li><a href="global.html#defineInputHtml">defineInputHtml</a></li><li><a href="global.html#defineSelect">defineSelect</a></li><li><a href="global.html#defineText">defineText</a></li><li><a href="global.html#encryptItem">encryptItem</a></li><li><a href="global.html#Error">Error</a></li><li><a href="global.html#ErrorBox">ErrorBox</a></li><li><a href="global.html#Form">Form</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Input">Input</a></li><li><a href="global.html#InputBox">InputBox</a></li><li><a href="global.html#limitMessage">limitMessage</a></li><li><a href="global.html#SelectInput">SelectInput</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Wed Mar 02 2022 15:52:10 GMT+0100 (heure normale d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
