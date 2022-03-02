@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom' 
-
 import { Page } from '../../style'
 import CreateEmployeeForm from '../../components/createEmployeeForm'
 

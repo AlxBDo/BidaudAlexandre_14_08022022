@@ -1,26 +1,26 @@
 # HRnet 
 [![forthebadge](https://alxbdo.github.io/RHDatePicker/src/img/made-with-react.svg)](https://forthebadge.com) 
 [![forthebadge](https://alxbdo.github.io/RHDatePicker/src/img/use-react-redux.svg)](https://forthebadge.com) 
-[![forthebadge](https://alxbdo.github.io/BidaudAlexandre_14_08022022/public/use-crypto-js.svg)](https://forthebadge.com) 
-[![forthebadge](https://alxbdo.github.io/BidaudAlexandre_14_08022022/public/use-cypress.svg)](https://forthebadge.com) 
-[![forthebadge](https://alxbdo.github.io/BidaudAlexandre_14_08022022/public/use-firestore.svg)](https://forthebadge.com) 
-[![forthebadge](https://alxbdo.github.io/BidaudAlexandre_14_08022022/public/use-mui-datatables.svg)](https://forthebadge.com) 
-[![forthebadge](https://alxbdo.github.io/BidaudAlexandre_14_08022022/public/use-prop-type.svg)](https://forthebadge.com) 
-[![forthebadge](https://alxbdo.github.io/BidaudAlexandre_14_08022022/public/use-react-modal.svg)](https://forthebadge.com) 
-[![forthebadge](https://alxbdo.github.io/BidaudAlexandre_14_08022022/public/use-react-select.svg)](https://forthebadge.com) 
-[![forthebadge](https://alxbdo.github.io/BidaudAlexandre_14_08022022/public/use-rhdatepicker.svg)](https://forthebadge.com) 
-[![forthebadge](https://alxbdo.github.io/BidaudAlexandre_14_08022022/public/use-styled-components.svg)](https://forthebadge.com) 
+[![forthebadge](https://alxbdo.github.io/BidaudAlexandre_14_08022022/src/assets/use-crypto-js.svg)](https://forthebadge.com) 
+[![forthebadge](https://alxbdo.github.io/BidaudAlexandre_14_08022022/src/assets/use-cypress.svg)](https://forthebadge.com) 
+[![forthebadge](https://alxbdo.github.io/BidaudAlexandre_14_08022022/src/assets/use-firestore.svg)](https://forthebadge.com) 
+[![forthebadge](https://alxbdo.github.io/BidaudAlexandre_14_08022022/src/assets/use-mui-datatables.svg)](https://forthebadge.com) 
+[![forthebadge](https://alxbdo.github.io/BidaudAlexandre_14_08022022/src/assets/use-prop-type.svg)](https://forthebadge.com) 
+[![forthebadge](https://alxbdo.github.io/BidaudAlexandre_14_08022022/src/assets/use-react-modal.svg)](https://forthebadge.com) 
+[![forthebadge](https://alxbdo.github.io/BidaudAlexandre_14_08022022/src/assets/use-react-select.svg)](https://forthebadge.com) 
+[![forthebadge](https://alxbdo.github.io/BidaudAlexandre_14_08022022/src/assets/use-rhdatepicker.svg)](https://forthebadge.com) 
+[![forthebadge](https://alxbdo.github.io/BidaudAlexandre_14_08022022/src/assets/use-styled-components.svg)](https://forthebadge.com) 
 
 HRnet is an internal responsive application for Human Resources of Health Wealth group.
 
-![ScreenShot](https://alxbdo.github.io/BidaudAlexandre_14_08022022/public/desktop-view.png) 
-![ScreenShot](https://alxbdo.github.io/BidaudAlexandre_14_08022022/public/desktop-view-ligth.png) 
+![ScreenShot](https://alxbdo.github.io/BidaudAlexandre_14_08022022/src/assets/desktop-view.png) 
+![ScreenShot](https://alxbdo.github.io/BidaudAlexandre_14_08022022/src/assets/desktop-view-ligth.png) 
 
-![ScreenShot](https://alxbdo.github.io/BidaudAlexandre_14_08022022/public/tab-view.png) 
-![ScreenShot](https://alxbdo.github.io/BidaudAlexandre_14_08022022/public/tab-view-light.png) 
+![ScreenShot](https://alxbdo.github.io/BidaudAlexandre_14_08022022/src/assets/tab-view.png) 
+![ScreenShot](https://alxbdo.github.io/BidaudAlexandre_14_08022022/src/assets/tab-view-light.png) 
 
-![ScreenShot](https://alxbdo.github.io/BidaudAlexandre_14_08022022/public/mobile-view.png) 
-![ScreenShot](https://alxbdo.github.io/BidaudAlexandre_14_08022022/public/mobile-view-ligth.png) 
+![ScreenShot](https://alxbdo.github.io/BidaudAlexandre_14_08022022/src/assets/mobile-view.png) 
+![ScreenShot](https://alxbdo.github.io/BidaudAlexandre_14_08022022/src/assets/mobile-view-ligth.png) 
 
 
 ## Table of contents 

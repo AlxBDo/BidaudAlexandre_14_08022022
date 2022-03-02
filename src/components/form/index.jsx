@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import PropTypes from "prop-types"
 import ReactModal from "react-modal"
-
 import { InputsSection, StyledForm, SubmitButton, ValidationSection } from "./style"
 import * as validationFormAction from "../../features/validationForm"
 import { selectValidationForm } from "../../utils/selectors"

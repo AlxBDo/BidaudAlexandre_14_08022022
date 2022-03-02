@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Form from "../form";
 import { defaultInputCtnRules } from "../form/style";
 
 
