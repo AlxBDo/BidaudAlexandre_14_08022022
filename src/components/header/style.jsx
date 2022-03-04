@@ -4,7 +4,7 @@ import { styleDef } from "../../style";
 export const HeaderStyled = styled.header`
     margin-bottom: 2%;
     display: flex;
-    padding: 1%;
+    padding: 1% 0;
     box-shadow: 0px 1px 10px black;
     align-items: center;
     background-color: ${ styleDef.headerBgColor };
@@ -14,13 +14,12 @@ export const HeaderStyled = styled.header`
         width: 100%; 
     }
     @media (max-width: 500px){
-        width: 100%
+        width: 100%;
         flex-wrap: wrap;
         h1, h2 { width: 45% }
         h1 { text-align: left } 
         h2 { 
             text-align: right; 
-            font-size: large;
         }
         a {
             width : 100%; 

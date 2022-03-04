@@ -54,11 +54,13 @@ Form.defaultProps = {
  */
 function Form(props) {
 
-    const { children, formId, inputsId, modalContentLabel, modalStyle, submitButtonText, submitFunction } = props
-    const dispatch = useDispatch()
-    dispatch(validationFormAction.addForm(formId, inputsId))
+    const { children, formId, inputsId, modalContentLabel, modalStyle, submitButtonText, submitFunction } = props 
     const validationForm = useSelector(selectValidationForm(formId))
-    modalParams.set(validationForm.status, validationForm.issue)
+    const dispatch = useDispatch()
+    if(!validationForm){
+        dispatch(validationFormAction.addForm(formId, inputsId))
+    } else { modalParams.set(validationForm.status, validationForm.issue) }
+    
 
     return(
 
@@ -68,7 +70,7 @@ function Form(props) {
 
             <ValidationSection>
                 <SubmitButton 
-                    disabled={ validationForm.status !== "checked" } 
+                    disabled={ validationForm && validationForm.status !== "checked" } 
                     data-testid="submit-btn" 
                     onClick={() => {
                         submitFunction(getValueAndClearInputs(inputsId)).then( (issue) => {

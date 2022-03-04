@@ -27,7 +27,7 @@
     "react-scripts": "5.0.0",
     "react-select": "^5.2.2",
     "redux": "^4.1.2",
-    "rh-date-picker": "^0.1.7",
+    "rh-date-picker": "^1.0.1",
     "styled-components": "^5.3.3",
     "web-vitals": "^2.1.4"
   },

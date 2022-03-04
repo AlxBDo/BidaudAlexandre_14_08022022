@@ -42,15 +42,15 @@ export const InputsSection = styled.section`
     justify-content: space-between;
     fieldset {
         width: 100%;
-        border: 1px solid ${theme === "dark" ? `black` : `white`};
+        border: 1px solid rgba(${theme === "dark" ? (`0, 0, 0, 0.5`) : (`255, 255, 255, 0.5`)});
         border-radius: 5px;
         background-color: rgba(${theme === "dark" ? (`0, 0, 0, 0.1`) : (`255, 255, 255, 0.3`)});
         ${ defaultFlex }
         legend {
-            padding: 10px 20px 13px;
+            padding: 0px 0px 11px;
             border-radius: 10px;
-            margin: 0;
-            color: ${theme === "dark" ? `black` : `white`};
+            margin: 0 1%;
+            color: rgba(${theme === "dark" ? (`0, 0, 0, 0.5`) : (`255, 255, 255, 0.5`)});
         }
     };
     div.css-1bytwjp-control {
@@ -60,9 +60,6 @@ export const InputsSection = styled.section`
 
 export const StyledForm = styled.form`
     text-align: left;
-    button {
-        padding: ${styleDef.padding};
-    };
     div.hrnet-dp-error {
         max-width: 250px;
         div {
@@ -83,6 +80,20 @@ export const StyledForm = styled.form`
 
 export const SubmitButton = styled.button`
     margin-bottom: 25px;
+    padding: 10px 15px;
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 3px;
+    box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    transition: all 250ms ease-out;
+    &:disabled {
+        opacity: 0.25;
+        cursor: not-allowed;
+        background-color: #465403;
+    }
+  }
 `
 
 export const ValidationSection = styled.section`
