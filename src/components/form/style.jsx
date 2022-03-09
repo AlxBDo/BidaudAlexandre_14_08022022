@@ -79,7 +79,8 @@ export const StyledForm = styled.form`
 `
 
 export const SubmitButton = styled.button`
-    margin-bottom: 25px;
+    margin-bottom: 25px; 
+    background-color: ${styleDef.colors.advice};
     padding: 10px 15px;
     border: none;
     color: white;

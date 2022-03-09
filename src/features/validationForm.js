@@ -40,12 +40,10 @@ const { actions, reducer } = createSlice({
                 payload : { formId }
             }), 
             reducer: (draft, action) => {
-                if(draft.forms[action.payload.formId]){
-                    draft.forms[action.payload.formId].status = "to-check"
-                    draft.forms[action.payload.formId].checked = { sum: 0 } 
-                    draft.forms[action.payload.formId].issue = false 
-                    draft.forms[action.payload.formId].values = {} 
-                }
+                draft.forms[action.payload.formId].status = "to-check"
+                draft.forms[action.payload.formId].checked = { sum: 0 } 
+                draft.forms[action.payload.formId].issue = false 
+                draft.forms[action.payload.formId].values = {} 
                 return
             }
         },

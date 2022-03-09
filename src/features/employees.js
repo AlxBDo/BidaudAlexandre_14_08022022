@@ -31,7 +31,7 @@ export function saveEmployee(employeeObj){
  * @example `employeesAction.fetchListFromFirestore()` 
  * @see decryptItem
  */
-export async function fetchListFromFirestore(){
+export async function fetchListFromFirestore(dispatch){
     const employeesFirestore = await getDocs(collection(firestoreDb, "employees"));
     const employees = []
     employeesFirestore.forEach((doc) => {
@@ -43,7 +43,7 @@ export async function fetchListFromFirestore(){
             employees.push(employee)
         }
     });
-    return employees
+    dispatch(actions.setList(employees))
 }
 
 

@@ -83,7 +83,6 @@ function Form(props) {
                 
                 <ReactModal 
                     appElement={ document.getElementById(formId)}
-                    closeTimeoutMS={1500} 
                     contentLabel={modalContentLabel} 
                     id={`${formId}-validation-modal`}
                     isOpen={ modalParams.submit } 
