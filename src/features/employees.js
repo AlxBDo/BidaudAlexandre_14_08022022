@@ -1,9 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { collection, getDocs } from "firebase/firestore"; 
-import { firestoreDb } from "../firebase/config";
-import { addEmployee } from "../firebase/addEmployee";
 import { selectEmployees } from "../utils/selectors";
-import { decryptItem } from "../utils/crypt";
 
 /**
  * Save new employee to employees list and to FireStore database 
@@ -18,7 +14,7 @@ export function saveEmployee(employeeObj){
         const employees = selectEmployees()
         const employeesList = employees(getState()).list
         if(employeesList.find(element => JSON.stringify(element) === JSON.stringify(employeeObj))){ return false }
-        addEmployee(employeeObj)
+        import("../firebase/addEmployee").then(firestore => { firestore.addEmployee(employeeObj) })
         dispatch(actions.addEmployeeToList(employeeObj)) 
         return true
     }
@@ -32,18 +28,25 @@ export function saveEmployee(employeeObj){
  * @see decryptItem
  */
 export async function fetchListFromFirestore(dispatch){
-    const employeesFirestore = await getDocs(collection(firestoreDb, "employees"));
-    const employees = []
-    employeesFirestore.forEach((doc) => {
-        const employee = doc.data()
-        if(employee.firstName){
-            employee.firstName = decryptItem(employee.firstName)
-            employee.lastName = decryptItem(employee.lastName) 
-            employee.street = decryptItem(employee.street)
-            employees.push(employee)
-        }
-    });
-    dispatch(actions.setList(employees))
+    import("firebase/firestore").then(firestore => {
+        import("../firebase/config").then( (db) => {
+            firestore.getDocs(firestore.collection(db.firestoreDb, "employees")).then( (doc) => {
+                import("../utils/crypt").then( (crypt) => {
+                    const employees = []
+                    doc.forEach( (data) => {
+                        const employee = data.data()
+                        if(employee.firstName){
+                            employee.firstName = crypt.decryptItem(employee.firstName)
+                            employee.lastName = crypt.decryptItem(employee.lastName) 
+                            employee.street = crypt.decryptItem(employee.street)
+                            employees.push(employee)
+                        }
+                    })
+                    return employees
+                }).then(employees => dispatch(actions.setList(employees)))
+            })
+        })
+    })
 }
 
 

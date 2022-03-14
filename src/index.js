@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom' 
 import { Provider } from 'react-redux';
@@ -7,9 +7,10 @@ import { style } from 'rh-date-picker/dist/style';
 import { styleDef } from "./style"
 import store from './store';
 import Header from './components/header';
-import Home from './pages/home' 
-import Error from './pages/error'
-import Employees from './pages/employees';
+
+const Home = lazy( () => import("./pages/home")) 
+const Error = lazy( () => import("./pages/error")) 
+const Employees = lazy( () => import("./pages/employees"))
 
 
 const GlobalStyle = createGlobalStyle`
@@ -48,15 +49,17 @@ const GlobalStyle = createGlobalStyle`
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store} >
-          <Router>
-            <GlobalStyle />
-            <Header />
-            <Routes>
-              <Route exact path="/" element={<Home />} />
-              <Route exact path="/employees" element={<Employees />} />
-              <Route path="*" element={<Error />} />
-            </Routes>
-          </Router>
+      <Router>
+        <GlobalStyle />
+        <Header />
+        <Suspense fallback={<div>Loading...</div>}> 
+          <Routes>
+            <Route exact path="/" element={<Home />} />
+            <Route exact path="/employees" element={<Employees />} />
+            <Route path="*" element={<Error />} />
+          </Routes>
+        </Suspense>
+      </Router>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

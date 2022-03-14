@@ -7,7 +7,6 @@ import { createTheme } from "@mui/material/styles";
 import MUIDatatable from "mui-datatables"
 import { selectEmployees } from "../../utils/selectors"
 import { Page } from "../../style"
-import * as employeesAction from "../../features/employees"
 
 
 const getMuiTheme = () => createTheme({
@@ -28,7 +27,9 @@ function Employees(){
   const dispatch = useDispatch()
 
   useEffect( () => {
-    dispatch(employeesAction.fetchListFromFirestore)
+    import("../../features/employees").then(employeesAction => {
+      dispatch(employeesAction.fetchListFromFirestore)
+    })
   }, [dispatch])
 
   const employees = useSelector(selectEmployees())

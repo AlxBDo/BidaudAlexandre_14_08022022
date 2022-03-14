@@ -8,7 +8,7 @@ style.setColors(colors)
 export const styleDef = {
     padding: "5px 10px", 
     headerBgColor: "#5B6E05", 
-    headerColor: style.color(), 
+    headerColor: "white", 
     colors
 }
 

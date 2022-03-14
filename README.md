@@ -13,14 +13,7 @@
 
 HRnet is an internal responsive application for Human Resources of Health Wealth group.
 
-![ScreenShot](https://alxbdo.github.io/BidaudAlexandre_14_08022022/src/assets/desktop-view.png) 
-![ScreenShot](https://alxbdo.github.io/BidaudAlexandre_14_08022022/src/assets/desktop-view-ligth.png) 
-
-![ScreenShot](https://alxbdo.github.io/BidaudAlexandre_14_08022022/src/assets/tab-view.png) 
-![ScreenShot](https://alxbdo.github.io/BidaudAlexandre_14_08022022/src/assets/tab-view-light.png) 
-
-![ScreenShot](https://alxbdo.github.io/BidaudAlexandre_14_08022022/src/assets/mobile-view.png) 
-![ScreenShot](https://alxbdo.github.io/BidaudAlexandre_14_08022022/src/assets/mobile-view-ligth.png) 
+![ScreenShot](https://alxbdo.github.io/BidaudAlexandre_14_08022022/src/assets/HealthWealthPresentation.gif) 
 
 
 ## Table of contents 
