@@ -24,7 +24,6 @@ export const defaultInputRules = `
 `
 
 export const defaultInputCtnRules = `
-    width: 250px;
     text-align: left;
     margin: 3% auto;
     ${ defaultFlex }

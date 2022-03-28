@@ -1,5 +1,7 @@
 {
   "name": "health-wealth-app",
+  "author": "Alexandre Bidaud",
+  "description": "HRnet is an internal responsive application for Human Resources of Health Wealth group.",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
