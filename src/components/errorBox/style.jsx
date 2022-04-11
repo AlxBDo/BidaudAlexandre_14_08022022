@@ -9,7 +9,7 @@ export const AdviceP = styled.p`
 ` 
 
 export const ErrorCtn = styled.div`
-    max-width: 250px;
+    width: 100%;
     padding: ${ styleDef.padding };
     text-align: justify;
 ` 

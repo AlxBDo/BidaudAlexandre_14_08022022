@@ -3,6 +3,9 @@ import { defaultInputCtnRules } from "../form/style";
 
 
 export const InputCtn = styled.div`
+    @media (min-width: 1020px) {
+        max-width: 22%;
+    }
     ${ defaultInputCtnRules }
 `
 
